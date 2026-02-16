@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Secure Login System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Secure Login System</h1>
+    {% if current_user.is_authenticated %}
+      <nav>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        {% if current_user.role == 'Admin' %}
+          <a href="{{ url_for('admin_dashboard') }}">Admin Panel</a>
+        {% endif %}
+        <form action="{{ url_for('logout') }}" method="POST" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <button type="submit">Logout</button>
+        </form>
+      </nav>
+    {% endif %}
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="alerts">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

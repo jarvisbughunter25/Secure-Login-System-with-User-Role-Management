@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Secure Login System{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Welcome, {{ current_user.username }}</h2>
+  <p><strong>Email:</strong> {{ current_user.email }}</p>
+  <p><strong>Role:</strong> {{ current_user.role }}</p>
+  <p>This dashboard is protected by authenticated sessions and role-aware authorization.</p>
+</section>
+{% endblock %}
