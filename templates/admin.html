@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard | Secure Login System{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Admin Dashboard</h2>
+  <p>Manage and review all registered users.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Registered At (UTC)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.created_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
